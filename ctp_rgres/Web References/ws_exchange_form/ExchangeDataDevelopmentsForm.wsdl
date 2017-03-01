@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd1="uri:faulty-knowledge-equipment" xmlns:soapbind="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12bind="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="uri:faulty-knowledge-equipment" name="ExchangeDataDevelopmentsForm" targetNamespace="uri:faulty-knowledge-equipment" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema xmlns:xs1="uri:faulty-knowledge-equipment" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="uri:faulty-knowledge-equipment" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:simpleType name="S_DATE">
+        <xs:restriction base="xs:string">
+          <xs:length value="8" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="S_DATETIME">
+        <xs:restriction base="xs:string">
+          <xs:length value="14" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="S_DEPATMENT">
+        <xs:restriction base="xs:string" />
+      </xs:simpleType>
+      <xs:simpleType name="S_DIRECT">
+        <xs:restriction base="xs:string">
+          <xs:length value="3" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="S_MESSAGE">
+        <xs:restriction base="xs:string" />
+      </xs:simpleType>
+      <xs:simpleType name="S_NUMBER">
+        <xs:restriction base="xs:string" />
+      </xs:simpleType>
+      <xs:simpleType name="S_STATUS">
+        <xs:restriction base="xs:string">
+          <xs:length value="1" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="S_TIME">
+        <xs:restriction base="xs:string">
+          <xs:length value="4" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="S_TM_NAME">
+        <xs:restriction base="xs:string" />
+      </xs:simpleType>
+      <xs:simpleType name="S_UID">
+        <xs:restriction base="xs:string">
+          <xs:length value="36" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="S_UID_EVENT">
+        <xs:restriction base="xs:string">
+          <xs:length value="36" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="S_WOKRS">
+        <xs:restriction base="xs:string" />
+      </xs:simpleType>
+      <xs:complexType name="T_RETURN">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="item" type="xs1:WA_RETURN" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="WA_RETURN">
+        <xs:sequence>
+          <xs:element name="STATUS" type="xs1:S_STATUS" />
+          <xs:element name="MESSAGE" type="xs1:S_MESSAGE" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="WA_RUN">
+        <xs:sequence>
+          <xs:element name="NUMBER" type="xs1:S_NUMBER" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="TM" type="xs1:WA_TM" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="WA_TM">
+        <xs:sequence>
+          <xs:element name="TM_NAME" type="xs1:S_TM_NAME" />
+          <xs:element name="TM_DATE_BEGIN" type="xs1:S_DATE" />
+          <xs:element name="TM_TIME_BEGIN" type="xs1:S_TIME" />
+          <xs:element name="TM_DATE_END" type="xs1:S_DATE" />
+          <xs:element name="TM_TIME_END" type="xs1:S_TIME" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="im_data">
+        <xs:sequence>
+          <xs:element name="DIRECT" type="xs1:S_DIRECT" />
+          <xs:element name="UID_HANDLER" type="xs1:S_UID_EVENT" />
+          <xs:element name="DATA_CREATE" type="xs1:S_DATETIME" />
+          <xs:element name="WOKRS" type="xs1:S_WOKRS" />
+          <xs:element name="DEPATMENT" type="xs1:S_DEPATMENT" />
+          <xs:element name="UID" type="xs1:S_UID" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="RUN" type="xs1:WA_RUN" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="set">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="im_data" type="xs1:im_data" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" nillable="true" type="xs1:T_RETURN" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </types>
+  <message name="setRequestMessage">
+    <part name="parameters" element="tns:set" />
+  </message>
+  <message name="setResponseMessage">
+    <part name="parameters" element="tns:setResponse" />
+  </message>
+  <portType name="ExchangeDataDevelopmentsFormPortType">
+    <operation name="set">
+      <input message="tns:setRequestMessage" />
+      <output message="tns:setResponseMessage" />
+    </operation>
+  </portType>
+  <binding name="ExchangeDataDevelopmentsFormSoapBinding" type="tns:ExchangeDataDevelopmentsFormPortType">
+    <soapbind:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="set">
+      <soapbind:operation soapAction="uri:faulty-knowledge-equipment#ExchangeDataDevelopmentsForm:set" style="document" />
+      <input>
+        <soapbind:body use="literal" />
+      </input>
+      <output>
+        <soapbind:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <binding name="ExchangeDataDevelopmentsFormSoap12Binding" type="tns:ExchangeDataDevelopmentsFormPortType">
+    <soap12bind:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="set">
+      <soap12bind:operation soapAction="uri:faulty-knowledge-equipment#ExchangeDataDevelopmentsForm:set" style="document" />
+      <input>
+        <soap12bind:body use="literal" />
+      </input>
+      <output>
+        <soap12bind:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="ExchangeDataDevelopmentsForm">
+    <port name="ExchangeDataDevelopmentsFormSoap" binding="tns:ExchangeDataDevelopmentsFormSoapBinding">
+      <documentation>
+        <wsi:Claim xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/" conformsTo="http://ws-i.org/profiles/basic/1.1" />
+      </documentation>
+      <soapbind:address location="http://10.20.18.92/dev_defect/ws/ws_exchange_form_develop.1cws" />
+    </port>
+    <port name="ExchangeDataDevelopmentsFormSoap12" binding="tns:ExchangeDataDevelopmentsFormSoap12Binding">
+      <soap12bind:address location="http://10.20.18.92/dev_defect/ws/ws_exchange_form_develop.1cws" />
+    </port>
+  </service>
+</definitions>
