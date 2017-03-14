@@ -61,6 +61,9 @@ namespace ctp_rgres
             bt_main_mod.Enabled = !bt_main_mod.Enabled;
             MainDescr.Enabled = !MainDescr.Enabled;
 
+            data_start.Enabled = !data_start.Enabled;
+            time_main_begin.Enabled = !time_main_begin.Enabled;
+
 
             // Отменим все эелементы на форме и откроем основные на изменение
 
@@ -436,6 +439,11 @@ namespace ctp_rgres
             bt_main_stop.Enabled = !bt_main_stop.Enabled;
             bt_main_mod.Enabled = !bt_main_mod.Enabled;
             MainDescr.Enabled = !MainDescr.Enabled;
+
+            data_start.Enabled = !data_start.Enabled;
+
+            time_main_begin.Enabled = !time_main_begin.Enabled;
+
             RegistrWorksElement();
 
         }
@@ -506,7 +514,7 @@ namespace ctp_rgres
 
                 element_array_time.value_revers_time(var_mod_time_end, var_mod_time_begin);
 
-                time_main_begin.Enabled = !time_main_begin.Enabled;
+                //time_main_begin.Enabled = !time_main_begin.Enabled;
                 time_main_end.Enabled = !time_main_end.Enabled;
                 var_mod_time_begin.Enabled = !var_mod_time_begin.Enabled;
 
